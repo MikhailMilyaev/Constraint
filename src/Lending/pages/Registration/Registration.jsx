@@ -1,0 +1,121 @@
+import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
+import classes from './Registration.module.css';
+
+const Registration = () => {
+  const [name, setName] = useState('');
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [errorMessage, setErrorMessage] = useState('');
+  const [showPassword, setShowPassword] = useState(false);
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
+
+    // Проверка валидности данных
+    if (!email || !password) {
+      setErrorMessage('Пожалуйста, заполните все поля');
+      return;
+    }
+
+    if (!/\S+@\S+\.\S+/.test(email)) {
+      setErrorMessage('Введите корректный email');
+      return;
+    }
+
+    // TODO: Реализовать логику отправки данных на сервер
+
+    console.log('Данные для входа:', { email, password });
+  };
+
+  const handleEmailClear = () => {
+    setEmail('');
+  };
+
+  const handleNameClear = () => {
+    setName('');
+  };
+
+  const togglePasswordVisibility = () => {
+    setShowPassword(!showPassword);
+  };
+
+  return (
+    <div className={classes.container}>
+      <form className={classes.loginForm} onSubmit={handleSubmit}>
+        <Link to="/" className={classes.brand}>
+          <img
+            src="https://cdn.leonardo.ai/users/11490471-750d-4139-b725-e1782ef5308f/generations/d9716816-b0bf-4314-9665-b093bbac1da4/Graphic_Design_make_a_logo_for_the_website_psychological_prac_1.jpg"
+            alt="Логотип"
+            className={classes.logo}
+          />
+          <span className={classes.brandName}>Constraint</span>
+        </Link>
+
+        <h2 className={classes.title}>Регирация</h2>
+
+        {errorMessage && <div className={classes.error}>{errorMessage}</div>}
+        
+        <div className={classes.inputGroup}>
+          <input
+            type="text"
+            id="name"
+            value={name}
+            onChange={(e) => setName(e.target.value)}
+            className={classes.input}
+            placeholder="Имя"
+          />
+          {name && (
+            <span className={classes.clearIcon} onClick={handleNameClear}>
+              ✖ 
+            </span>
+          )}
+        </div>
+        <div className={classes.inputGroup}>
+          <input
+            type="email"
+            id="email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            className={classes.input}
+            placeholder="Электронная почта"
+          />
+          {email && (
+            <span className={classes.clearIcon} onClick={handleEmailClear}>
+              ✖ 
+            </span>
+          )}
+        </div>
+
+        <div className={classes.inputGroup}>
+          <input
+            type={showPassword ? 'text' : 'password'}
+            id="password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            className={classes.input}
+            placeholder="Пароль"
+          />
+          {password && (
+            <span
+              className={classes.passwordIcon}
+              onClick={togglePasswordVisibility}
+            >
+              {showPassword ? '🙈' : '👁️'}
+            </span>
+          )}
+        </div>
+
+        <button type="submit" className={classes.button}>
+          Вперед
+        </button>
+
+        <p className={classes.signupLink}>
+            Есть аккаунт? <Link to="/login">Войти</Link>
+        </p>
+      </form>
+    </div>
+  );
+};
+
+export default Registration;

@@ -1,0 +1,147 @@
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background-color: #f8f8f8; 
+  }
+  
+  .loginForm {
+    background-color: #fff;
+    padding: 3rem;
+    border-radius: 10px; 
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 400px;
+    text-align: center;
+  }
+  
+  .brand {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start; 
+    margin-bottom: 2rem;
+    font-size: 1.2rem;
+    font-weight: bold;
+    text-decoration: none;
+    color: inherit;
+  }
+
+  .brand:hover {
+    text-decoration: underline;
+  }
+
+
+  .logo {
+    height: 25px; 
+    margin-right: 8px;
+  }
+  
+  .title {
+    font-size: 20px;
+    margin-bottom: 1rem;
+  }
+  
+  .error {
+    color: red;
+    margin-bottom: 1rem;
+  }
+  
+  .inputGroup {
+    margin-bottom: 1.5rem;
+    position: relative; 
+  }
+  
+  .inputGroup label {
+    display: none; 
+  }
+  
+  .input {
+    width: 100%;
+    padding: 1rem;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-sizing: border-box;
+    background-color: #f0f0f0; 
+    color: black; 
+    font-size: 16px;
+  }
+  
+  .input::placeholder {
+    color: #999;
+  }
+  
+  .button {
+    background-color: #f0f0f0; 
+    color: #333;
+    border: none;
+    padding: 1rem 2rem;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1.1rem;
+    transition: all 0.2s ease; 
+    width: 100%; 
+  }
+  
+  .button:hover, 
+  .button:focus {
+    background-color: #333; 
+    color: #fff;
+  }
+  
+  .signupLink {
+    text-align: center;
+  }
+
+  .signupLink a {
+    color: #333;
+    color: inherit;
+    text-decoration: none;
+  }
+  
+  .signupLink a:hover {
+    color: #333;
+    text-decoration: underline;
+  }
+
+  /*  Стили для иконок  */
+  .clearIcon, 
+  .passwordIcon {
+    position: absolute;
+    top: 50%;
+    right: 15px;
+    transform: translateY(-50%); 
+    cursor: pointer;
+    color: black; 
+  }
+  
+  /*  Медиа-запрос для планшетов  */
+  @media (min-width: 768px) {
+  
+    .loginForm {
+      padding: 4rem;
+    }
+  
+    .title {
+      font-size: 1.5rem; 
+    }
+  }
+
+
+  @media (max-width: 768px) {
+    .container {
+      min-height: 100vh;
+      background-color: white; 
+      align-items: start;
+    }
+
+    .loginForm {
+      background-color: #fff;
+      padding: 3rem;
+      border-radius: 10px; 
+      box-shadow: none;
+      width: 100%;
+      max-width: 400px;
+      text-align: center;
+    }
+  }
