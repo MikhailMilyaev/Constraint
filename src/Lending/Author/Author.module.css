@@ -1,0 +1,49 @@
+.author {
+    padding: 4rem 0;
+    background-color: #f8f8f8; /*  Пример цвета фона  */
+  }
+  
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 2rem;
+  }
+  
+  .content {
+    display: flex;
+    align-items: center;
+  }
+  
+  .image {
+    width: 300px;
+    height: 300px;
+    object-fit: cover; /*  Чтобы изображение сохраняло пропорции  */
+    border-radius: 50%; /*  Делаем изображение круглым  */
+    margin-right: 2rem;
+  }
+  
+  .info {
+    flex: 1; /*  Описание займет оставшееся пространство  */
+  }
+  
+  .name {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+  }
+  
+  .description {
+    font-size: 1.2rem;
+    line-height: 1.6;
+  }
+  
+  /*  Адаптивность для мобильных и планшетов  */
+  @media (max-width: 768px) {
+    .content {
+      flex-direction: column; /*  Располагаем элементы друг под другом  */
+    }
+  
+    .image {
+      margin-right: 0;
+      margin-bottom: 2rem;
+    }
+  }

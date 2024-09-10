@@ -1,15 +1,16 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import classes from './NavBar.module.css';
-import { Link } from 'react-router-dom';
+import { HashLink as Link } from 'react-router-hash-link';
 
 const NavBar = () => {
   const [showFullNav, setShowFullNav] = useState(false);
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
+  const [showNav, setShowNav] = useState(true);
+  const [lastScrollY, setLastScrollY] = useState(0);
 
   const toggleFullNav = () => {
     setShowFullNav(!showFullNav);
   };
-
 
   // Обработчик для блокировки прокрутки
   useEffect(() => {
@@ -31,8 +32,24 @@ const NavBar = () => {
     return () => window.removeEventListener('resize', handleResize);
   }, []);
 
+  // Используем useCallback для handleScroll
+  const handleScroll = useCallback(() => {
+    const currentScrollY = window.scrollY;
+    if (currentScrollY > lastScrollY && showNav) {
+      setShowNav(false);
+    } else if (currentScrollY < lastScrollY && !showNav) {
+      setShowNav(true);
+    }
+    setLastScrollY(currentScrollY);
+  }, [showNav, lastScrollY]);
+
+  useEffect(() => {
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, [handleScroll]);
+
   return (
-    <nav className={classes.navBar}>
+    <nav className={`${classes.navBar} ${!showNav ? classes.hidden : ''}`}>
       <div className={classes.container}>
         <div className={classes.brand}>
           <img
@@ -40,29 +57,28 @@ const NavBar = () => {
             alt="Логотип"
             className={classes.logo}
           />
-          <span className={classes.brandName}>Constraint</span>
+          <Link to="#" smooth={true} className={classes.brandLink}>
+            <span className={classes.brandName}>Constraint</span>
+          </Link>  
         </div>
 
         {/* Ссылки навигации для десктопной версии */}
         <div className={classes.navLinks}>
-          <a href="#">Процессинг</a>
-          <a href="#">Как это работает?</a>
-          <a href="#">Результаты</a>
-          <a href="#">Автор</a>
-          <a href="#">Отзывы</a>
-          <a href="#">FAQ</a>
-          <a href="#">Контакты</a>
+          <Link to="#inner-space" smooth={true}>Внутреннее пространство</Link>
+          <Link to="#ideas" smooth={true}>Идеи</Link>
+          <Link to="#thoughts-images" smooth={true}>Мысли – образы</Link>
+          <Link to="#results" smooth={true}>Результаты</Link>
+          <Link to="#author" smooth={true}>Автор</Link>
         </div>
 
         <div className={classes.navActions}>
-          <Link to="/login" ><button className={classes.loginButton}>ВОЙТИ</button></Link>
+          <Link to="/login"><button className={classes.loginButton}>ВОЙТИ</button></Link>
 
           {/* Кнопка меню (для мобильных и планшетов) */}
           {windowWidth < 1024 && (
             <button className={classes.menuButton} onClick={toggleFullNav}>
               <span className={classes.menuIcon}>☰</span>
-            </button>
-          )}
+            </button>)}
         </div>
       </div>
 
@@ -70,16 +86,13 @@ const NavBar = () => {
       {windowWidth < 1024 && (
         <div
           className={`${classes.fullNav} ${showFullNav ? classes.open : ''}`}
-          onClick={toggleFullNav}
-        >
+          onClick={toggleFullNav}>
           <div className={classes.fullNavLinks}>
-            <a href="#">Процессинг</a>
-            <a href="#">Как это работает?</a>
-            <a href="#">Результаты</a>
-            <a href="#">Автор</a>
-            <a href="#">Отзывы</a>
-            <a href="#">FAQ</a>
-            <a href="#">Контакты</a>
+            <Link to="#inner-space" smooth={true} onClick={toggleFullNav}>Внутреннее пространство</Link>
+            <Link to="#ideas" smooth={true} onClick={toggleFullNav}>Идеи</Link>
+            <Link to="#thoughts-images" smooth={true} onClick={toggleFullNav}>Мысли – образы</Link>
+            <Link to="#results" smooth={true} onClick={toggleFullNav}>Результаты</Link>
+            <Link to="#author" smooth={true} onClick={toggleFullNav}>Автор</Link>
           </div>
         </div>
       )}

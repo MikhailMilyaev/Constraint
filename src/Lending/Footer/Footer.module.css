@@ -1,0 +1,81 @@
+.footer {
+  background-color: #000;
+  color: #fff;
+  padding: 2rem 0;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.brandName {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #fff;
+  text-decoration: none;
+  order: 1; 
+}
+
+.brandName:hover {
+  text-decoration: underline;
+}
+
+/* Десктопная версия */
+.policyDesktop {
+  color: #ccc;
+  text-decoration: none;
+  font-size: 1rem;
+  order: 2;
+}
+
+.telegramDesktop {
+  display: flex;
+  align-items: center;
+  color: #fff;
+  text-decoration: none;
+  margin-left: 2rem;
+  order: 3; 
+}
+
+.icon {
+  height: 24px;
+  margin-right: 10px;
+}
+
+.telegram {
+  display: flex;
+  align-items: center;
+  color: #fff;
+  text-decoration: none;
+}
+
+.policy {
+  color: #ccc;
+  text-decoration: none;
+  font-size: 1rem;
+}
+
+/*  Адаптивность для мобильных и планшетов  */
+@media (max-width: 768px) {
+  .container {
+    flex-direction: column; 
+    text-align: center;     
+  }
+
+  .telegram {
+    margin-left: 0;
+    margin-top: 2rem; 
+  }
+
+  .telegramDesktop {
+    order: 1; 
+  }
+
+  .policy {
+    margin-top: 1rem;  
+  }
+}

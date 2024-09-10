@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import classes from './Login.module.css';
+import axios from 'axios';
 
 const Login = () => {
   const [email, setEmail] = useState('');
@@ -8,7 +9,7 @@ const Login = () => {
   const [errorMessage, setErrorMessage] = useState('');
   const [showPassword, setShowPassword] = useState(false);
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
 
     // Проверка валидности данных
@@ -22,7 +23,18 @@ const Login = () => {
       return;
     }
 
-    console.log('Данные для входа:', { email, password });
+    try {
+      const response = await axios.post('/api/login', { email, password });
+      const token = response.data.token;
+
+      // Сохраняем токен в localStorage
+      localStorage.setItem('token', token);
+
+      // Перенаправляем пользователя (например, на главную страницу)
+      window.location.href = '/'; 
+    } catch (error) {
+      setErrorMessage(error.response.data.message || 'Произошла ошибка при авторизации');
+    }
   };
 
   const handleEmailClear = () => {

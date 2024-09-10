@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import classes from './Registration.module.css';
+import axios from 'axios';
 
 const Registration = () => {
   const [name, setName] = useState('');
@@ -9,11 +10,11 @@ const Registration = () => {
   const [errorMessage, setErrorMessage] = useState('');
   const [showPassword, setShowPassword] = useState(false);
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
 
     // Проверка валидности данных
-    if (!email || !password) {
+    if (!name || !email || !password) {
       setErrorMessage('Пожалуйста, заполните все поля');
       return;
     }
@@ -23,9 +24,14 @@ const Registration = () => {
       return;
     }
 
-    // TODO: Реализовать логику отправки данных на сервер
-
-    console.log('Данные для входа:', { email, password });
+    try {
+      const response = await axios.post('/api/register', { name, email, password });
+      console.log(response);
+      // Обрабатываем успешную регистрацию (например, перенаправляем на страницу входа)
+      window.location.href = '/login';
+    } catch (error) {
+      setErrorMessage(error.response.data.message || 'Произошла ошибка при регистрации');
+    }
   };
 
   const handleEmailClear = () => {

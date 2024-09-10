@@ -1,8 +1,16 @@
 .navBar {
   background-color: #fff;
   padding: 1rem 0;
-  position: relative;
+  position: fixed; /*  Фиксируем панель  */
+  top: 0;
+  left: 0;
+  width: 100%;
   z-index: 10;
+  transition: transform 0.3s ease; /*  Добавляем плавный переход  */
+}
+
+.navBar.hidden {
+  transform: translateY(-100%); /*  Скрываем панель  */
 }
 
 .container {
@@ -20,14 +28,35 @@
   font-size: 18px;
 }
 
+/*  Стили для ссылки  */
+.brand a { 
+  color: black;
+  text-decoration: none;  /*  Добавляем сюда  */
+}
+
+/*  Подчеркивание при наведении  */
+.brand a:hover {
+  text-decoration: underline;
+}
+
 .logo {
   height: 30px;
   margin-right: 10px;
 }
 
+/* Стили для Constraint */
 .brandName {
   font-size: 1.2rem;
   font-weight: bold;
+  color: black;
+}
+
+.brandName {
+  text-decoration: none;
+}
+
+.brandName:hover {
+  text-decoration: underline;
 }
 
 .navActions {
@@ -46,7 +75,6 @@
   cursor: pointer;
 }
 
-
 .menuButton {
   background: none;
   border: none;
@@ -63,11 +91,11 @@
 
 .navLinks a {
   color: #333; 
-  text-decoration: none;
   margin-right: 2rem; 
   font-weight: 500; 
   transition: color 0.2s ease; 
   font-size: 18px;
+  text-decoration: none; 
 }
 
 .navLinks a:hover {
@@ -93,7 +121,7 @@
   display: block;
   padding: 0.5rem 0;
   color: #000;
-  text-decoration: none;
+  text-decoration: none; 
   font-size: 1.8rem;
   border-bottom: 1px solid #ccc;
   padding-bottom: 10px;
